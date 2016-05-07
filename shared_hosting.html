@@ -23,7 +23,8 @@ layout: default
           </tr>
         </thead>
         <tbody>
-        {% assign hosts = (site.data.hosts | filter_by_type: 'shared' | map: 'downcase' | sort: 'name') %}
+        {% assign hosts_filtered = (site.data.hosts | filter_by_type: 'shared') %}
+        {% assign hosts = (hosts_filtered | sort: 'name') %}
         {% for host in hosts %}
           <tr>
             <td class="host-name"><a href="{{ host.url }}">{{ host.name }}</a></td>
