@@ -24,13 +24,12 @@ layout: default
         </thead>
         <tbody>
         {% assign hosts_filtered = (site.data.hosts | filter_by_type: 'shared') %}
-        {% assign sorting_helper = []; %}
         {% for host in hosts_filtered %}
-            {% capture sorting_helper[forloop.index0] %}{{ forloop.index }}{% endcapture %}
+            {% capture host.slug %}a{% endcapture %}
         {% endfor %}
         {% assign hosts = (hosts_filtered | sort: 'name') %}
         {% for host in hosts %}
-          <tr data-index="{{ forloop.index0 }}" data-sort-helper="{{ sorting_helper[forloop.index0] }}">
+          <tr data-index="{{ forloop.index0 }}" data-sort-helper="{{ host.slug }}">
             <td class="host-name"><a href="{{ host.url }}">{{ host.name }}</a></td>
             <td class="host-info" data-last-scanned="{{ host.last_scanned_at }}">
                 <i class="fa fa-times"></i>
