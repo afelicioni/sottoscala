@@ -25,11 +25,11 @@ layout: default
         <tbody>
         {% assign hosts_filtered = (site.data.hosts | filter_by_type: 'shared') %}
         {% for host in hosts_filtered %}
-            {% assign host['name'] = (host['name'] | downcase) %}
+            {% assign host['slug'] = (host['name'] | downcase) %}
         {% endfor %}
         {% assign hosts = (hosts_filtered | sort: 'name') %}
         {% for host in hosts %}
-          <tr>
+          <tr data-slug="{{ host.slug }}">
             <td class="host-name"><a href="{{ host.url }}">{{ host.name }}</a></td>
             <td class="host-info" data-last-scanned="{{ host.last_scanned_at }}">
                 <i class="fa fa-times"></i>
