@@ -24,8 +24,10 @@ layout: default
         </thead>
         <tbody>
         {% assign hosts_filtered = (site.data.hosts | filter_by_type: 'shared') %}
-        {% capture hosts_intermediate %}{% for entry in hosts_filtered %}{{ entry['name'] | downcase }}&#x1F;{{ entry }}{% unless forloop.last %}&#x1E;{% endunless %}{% endfor %}{% endcapture %}
-        {% assign hosts = (hosts_intermediate | split:'&#x1E;' | sort: 'name') %}
+        {% for host in hosts_filtered %}
+            {% assign host['name'] = (host['name'] | downcase) %}
+        {% endfor %}
+        {% assign hosts = (hosts_filtered | sort: 'name') %}
         {% for host in hosts %}
           <tr>
             <td class="host-name"><a href="{{ host.url }}">{{ host.name }}</a></td>
