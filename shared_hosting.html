@@ -29,7 +29,7 @@ layout: default
         {% endfor %}
         {% assign hosts = (hosts_filtered | sort: 'name') %}
         {% for host in hosts %}
-          <tr data-slug="{{ host.slug }}">
+          <tr data-slug="{{ forloop.index0 }}">
             <td class="host-name"><a href="{{ host.url }}">{{ host.name }}</a></td>
             <td class="host-info" data-last-scanned="{{ host.last_scanned_at }}">
                 <i class="fa fa-times"></i>
