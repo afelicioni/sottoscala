@@ -25,7 +25,7 @@ layout: default
         <tbody>
         {% assign hosts_filtered = (site.data.hosts | filter_by_type: 'shared') %}
         {% for host in hosts_filtered %}
-            {% capture host.name %}{{ host.name | downcase }}{% endcapture %}
+            {% capture host.slug %}{{ host.name | downcase }}{% endcapture %}
         {% endfor %}
         {% assign hosts = (hosts_filtered | sort: 'name') %}
         {% for host in hosts %}
