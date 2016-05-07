@@ -1,0 +1,54 @@
+---
+layout: default
+---
+
+<article class="hosts">
+    <section>
+        <div class="host-description">
+            <h2>Shared Hosting</h2>
+            <p>Shared hosting is the most common type of hosting. It means that multiple websites owned by various people are all jammed onto the same server. These are often the slowest to update PHP versions because of the potential for breaking many sites. Still, manual upgrade options should be offered to move from one PHP version to another, and automatic updates at the patch level (0.0.X) should be provided.</p>
+            <hr>
+        </div>
+        <table class="tables tables__scrollbar" data-sortable>
+        <thead>
+          <tr>
+            <th>Host</th>
+            <th>Last Scanned</th>
+            <th>7.0</th>
+            <th>5.6</th>
+            <th>5.5</th>
+            <th>5.4</th>
+            <th>5.3</th>
+            <th>Default</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% assign hosts = (site.data.hosts | filter_by_type: 'shared' | sort: 'name') %}
+        {% for host in hosts %}
+          <tr>
+            <td class="host-name"><a href="{{ host.url }}">{{ host.name }}</a></td>
+            <td class="host-info" data-last-scanned="{{ host.last_scanned_at }}">
+                <i class="fa fa-times"></i>
+            </td>
+            <td class="host-info version">
+                {% if host.versions[70] %}{{ host.versions[70].version }}{% else %}-{% endif %}
+            </td>
+            <td class="host-info version">
+                {% if host.versions[56] %}{{ host.versions[56].version }}{% else %}-{% endif %}
+            </td>
+            <td class="host-info version">
+                {% if host.versions[55] %}{{ host.versions[55].version }}{% else %}-{% endif %}
+            </td>
+            <td class="host-info version">
+                {% if host.versions[54] %}{{ host.versions[54].version }}{% else %}-{% endif %}
+            </td>
+            <td class="host-info version">
+                {% if host.versions[53] %}{{ host.versions[53].version }}{% else %}-{% endif %}
+            </td>
+            <td class="host-info version">{% if host.default %}{{ host.versions[host.default].version }}{% else %}<em>???</em>{% endif %}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    </section>
+</article>
